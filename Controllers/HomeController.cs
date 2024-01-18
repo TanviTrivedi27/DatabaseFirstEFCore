@@ -7,15 +7,18 @@ namespace DatabaseFirstEFCore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CodeFirstDBContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,CodeFirstDBContext context)
         {
             _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var data= context.Students.ToList();
+            return View(data);
         }
 
         public IActionResult Privacy()
